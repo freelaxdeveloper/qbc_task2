@@ -6,11 +6,15 @@ error_reporting(E_ALL);
 use Jenssegers\Blade\Blade;
 use App\Services\EloquentLoader;
 
+$dotenv = Dotenv\Dotenv::create(__DIR__ . '../../');
+$dotenv->load();
+$dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS']);
+
 $eloquentLoader = new EloquentLoader([
-  'DATABASE_HOST' => 'localhost',
-  'DATABASE_NAME' => 'qbc_task',
-  'DATABASE_USER' => 'root',
-  'DATABASE_PASSWORD' => 'sl123',
+  'DATABASE_HOST'     => getenv('DB_HOST'),
+  'DATABASE_NAME'     => getenv('DB_NAME'),
+  'DATABASE_USER'     => getenv('DB_USER'),
+  'DATABASE_PASSWORD' => getenv('DB_PASS'),
 ]);
 $eloquentLoader->load();
 
