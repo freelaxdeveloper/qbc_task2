@@ -9,13 +9,13 @@ $user_id = (integer) $_GET['id'];
 
 $manualtypes = ManualType::with(['manuals' => function ($query) use ($user_id){
     return $query->with(['value' => function ($query) use ($user_id){
-        return $query->whereUserId($user_id)->whereValue('Кот Вася');
+        return $query->whereUserId($user_id);
     }]);
 }])->get();
 
-dd2($manualtypes->toArray());
+//dd2($manualtypes->toArray());
 
 $user = User::find($user_id);
 
 
-echo view('user', compact('user'));
+echo view('user', compact('user', 'manualtypes'));

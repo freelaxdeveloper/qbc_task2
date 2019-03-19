@@ -1,11 +1,9 @@
 <h1>{{ $user->login }}</h1>
 
-<b>Фото</b><br/>
-Имя кота: Кот Вася<br/>
-Опишите кота: Опишите кота
-Опишите кота
-Опишите кота
-Опишите кота
-<hr/>
-
-<h1>{{ $user }}</h1>
+@foreach($manualtypes as $manualtype)
+   <b>{{ $manualtype->title }}</b><br><br>
+    @foreach($manualtype->manuals as $item)
+        {{$item->label}}: {{$item->value['value']}} <br/>
+    @endforeach
+   <hr/>
+@endforeach
