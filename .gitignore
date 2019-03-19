@@ -1,3 +1,4 @@
 vendor
 resources/views/cache
 storage/files
+.idea
