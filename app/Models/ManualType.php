@@ -10,6 +10,6 @@ class ManualType extends Model
 
   public function manuals()
   {
-    return $this->hasMany(Manual::class, 'type', 'type_key');
+    return $this->hasMany(Manual::class);
   }
 }

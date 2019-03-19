@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Мар 19 2019 г., 11:10
--- Версия сервера: 5.7.22-0ubuntu0.17.10.1
--- Версия PHP: 5.6.36-1+ubuntu17.10.1+deb.sury.org+1
+-- Время создания: Мар 19 2019 г., 11:42
+-- Версия сервера: 5.7.25-0ubuntu0.18.04.2
+-- Версия PHP: 7.2.15-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `manuals` (
   `id` int(11) NOT NULL,
-  `type` varchar(255) NOT NULL,
+  `manual_type_id` int(11) NOT NULL,
   `label` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `type_field` enum('select','text','textarea','file') NOT NULL DEFAULT 'select',
@@ -56,7 +56,6 @@ CREATE TABLE `manual_options` (
 CREATE TABLE `manual_types` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `type_key` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -128,7 +127,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `manuals`
 --
 ALTER TABLE `manuals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT для таблицы `manual_options`
 --
@@ -143,7 +142,7 @@ ALTER TABLE `manual_types`
 -- AUTO_INCREMENT для таблицы `manual_values`
 --
 ALTER TABLE `manual_values`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT для таблицы `users`
 --

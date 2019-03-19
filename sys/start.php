@@ -10,7 +10,7 @@ $eloquentLoader = new EloquentLoader([
   'DATABASE_HOST' => 'localhost',
   'DATABASE_NAME' => 'qbc_task',
   'DATABASE_USER' => 'root',
-  'DATABASE_PASSWORD' => 'sl123',
+  'DATABASE_PASSWORD' => 'root',
 ]);
 $eloquentLoader->load();
 

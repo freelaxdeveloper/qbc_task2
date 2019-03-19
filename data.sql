@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Мар 19 2019 г., 11:13
--- Версия сервера: 5.7.22-0ubuntu0.17.10.1
--- Версия PHP: 5.6.36-1+ubuntu17.10.1+deb.sury.org+1
+-- Время создания: Мар 19 2019 г., 11:42
+-- Версия сервера: 5.7.25-0ubuntu0.18.04.2
+-- Версия PHP: 7.2.15-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -24,14 +24,14 @@ SET time_zone = "+00:00";
 -- Дамп данных таблицы `manuals`
 --
 
-INSERT INTO `manuals` (`id`, `type`, `label`, `user_id`, `type_field`, `position`) VALUES
-(1, 'moyi_foto', 'Имя кота', 1, 'text', 1),
-(3, 'moyi_foto', 'Опишите кота', 1, 'textarea', 3),
-(4, 'moyi_foto', 'Домашние питомцы', 1, 'select', 4),
-(7, 'moyi_foto', 'Порода', 1, 'text', 9),
-(8, 'moyi_foto', 'Select', 1, 'select', 10),
-(9, 'testoviy_spravochnik', 'Для теста', 1, 'text', 3),
-(11, 'moyi_foto', 'Фото кота', 1, 'file', 2);
+INSERT INTO `manuals` (`id`, `manual_type_id`, `label`, `user_id`, `type_field`, `position`) VALUES
+(1, 2, 'Имя кота', 1, 'text', 1),
+(3, 2, 'Опишите кота', 1, 'textarea', 3),
+(4, 2, 'Домашние питомцы', 1, 'select', 4),
+(7, 2, 'Порода', 1, 'text', 9),
+(8, 2, 'Select', 1, 'select', 10),
+(9, 1, 'Для теста', 1, 'text', 3),
+(11, 2, 'Фото кота', 1, 'file', 2);
 
 --
 -- Дамп данных таблицы `manual_options`
@@ -49,18 +49,21 @@ INSERT INTO `manual_options` (`id`, `manual_id`, `label`) VALUES
 -- Дамп данных таблицы `manual_types`
 --
 
-INSERT INTO `manual_types` (`id`, `title`, `type_key`, `type`) VALUES
-(1, 'Тестовый справочник', 'testoviy_spravochnik', 'people'),
-(2, 'Фото', 'moyi_foto', 'people');
+INSERT INTO `manual_types` (`id`, `title`, `type`) VALUES
+(1, 'Тестовый справочник', 'people'),
+(2, 'Фото', 'people');
 
 --
 -- Дамп данных таблицы `manual_values`
 --
 
 INSERT INTO `manual_values` (`id`, `user_id`, `manual_id`, `value`) VALUES
-(39, 1, 1, 'Имя кота'),
-(40, 1, 4, 'Кот'),
-(41, 1, 8, 'Поле 1');
+(42, 1, 9, 'Для теста'),
+(43, 1, 1, 'Кот Вася'),
+(44, 1, 3, 'Опишите кота\nОпишите кота\nОпишите кота\nОпишите кота\n'),
+(45, 1, 4, 'Кот'),
+(46, 1, 7, 'Порода'),
+(47, 1, 8, 'Поле 2');
 
 --
 -- Дамп данных таблицы `users`
