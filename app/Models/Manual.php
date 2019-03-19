@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\ManualOption;
 use App\Models\ManualValue;
+use App\Models\ManualType;
 
 class Manual extends Model
 {
@@ -17,5 +18,10 @@ class Manual extends Model
     public function value()
     {
         return $this->hasOne(ManualValue::class);
+    }
+
+    public function manualType()
+    {
+        return $this->belongsTo(ManualType::class);
     }
 }

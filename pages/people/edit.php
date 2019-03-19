@@ -18,13 +18,17 @@ if (!$user = User::find($user_id)) {
     exit;
 }
 
-$test = ManualValue::whereUserId($user->id)->get();
+$currentType = 'club';
+$test = ManualValue::whereHas('manual', function($query) use ($currentType) {
+    return $query->whereHas('manualType', function($query) use ($currentType) {
+        return $query->where('type', '!=', $currentType);
+    });
+})->whereUserId($user->id)->get();
+
 dd2($test->toArray());
 
 
-//$manualTypes = ManualType::valueByUser($user_id)->whereHas('comments', function ($query) {
-//    $query->where('content', 'like', 'foo%');
-//})->get();
+$manualTypes = ManualType::valueByUser($user_id)->get();
 
 if (isset($_POST['send']) && !empty($_POST['dictionary'])) {
     $postData = $_POST['dictionary'];
