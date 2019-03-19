@@ -12,4 +12,13 @@ class ManualType extends Model
   {
     return $this->hasMany(Manual::class);
   }
+
+  public function scopeValueByuser($query, $user_id)
+  {
+    return $query->with(['manuals' => function ($query) use ($user_id){
+      return $query->with(['value' => function ($query) use ($user_id){
+          return $query->whereUserId($user_id);
+      }]);
+  }]);
+  }
 }

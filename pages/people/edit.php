@@ -18,8 +18,13 @@ if (!$user = User::find($user_id)) {
     exit;
 }
 
+$test = ManualValue::whereUserId($user->id)->get();
+dd2($test->toArray());
 
-$manualTypes = ManualType::get();
+
+//$manualTypes = ManualType::valueByUser($user_id)->whereHas('comments', function ($query) {
+//    $query->where('content', 'like', 'foo%');
+//})->get();
 
 if (isset($_POST['send']) && !empty($_POST['dictionary'])) {
     $postData = $_POST['dictionary'];

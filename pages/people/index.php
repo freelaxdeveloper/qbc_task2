@@ -7,13 +7,7 @@ use App\Models\ManualType;
 
 $user_id = (integer) $_GET['id'];
 
-$manualtypes = ManualType::with(['manuals' => function ($query) use ($user_id){
-    return $query->with(['value' => function ($query) use ($user_id){
-        return $query->whereUserId($user_id);
-    }]);
-}])->get();
-
-//dd2($manualtypes->toArray());
+$manualtypes = ManualType::valueByUser($user_id)->get();
 
 $user = User::find($user_id);
 
