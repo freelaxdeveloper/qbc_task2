@@ -4,9 +4,17 @@ require_once 'sys/start.php';
 
 use App\Models\User;
 use App\Models\ManualType;
-//dd2($_GET);
-$manualtypes = ManualType::all();
+
 $user_id = (integer) $_GET['id'];
+
+$manualtypes = ManualType::with(['manuals' => function ($query) use ($user_id){
+    return $query->with(['value' => function ($query) use ($user_id){
+        return $query->whereUserId($user_id)->whereValue('Кот Вася');
+    }]);
+}])->get();
+
+dd2($manualtypes->toArray());
+
 $user = User::find($user_id);
 
 
