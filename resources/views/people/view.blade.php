@@ -1,3 +1,5 @@
+<a href="/">Home</a><br/>
+
 <h1>{{ $user->login }}</h1>
 
 @foreach($manualtypes as $manualtype)

@@ -1,6 +1,6 @@
 <?php
-require_once 'vendor/autoload.php';
-require_once 'sys/start.php';
+require_once '../../vendor/autoload.php';
+require_once '../../sys/start.php';
 
 use App\Models\User;
 use App\Models\ManualType;
@@ -18,4 +18,4 @@ $manualtypes = ManualType::with(['manuals' => function ($query) use ($user_id){
 $user = User::find($user_id);
 
 
-echo view('user', compact('user', 'manualtypes'));
+echo view('people.view', compact('user', 'manualtypes'));
