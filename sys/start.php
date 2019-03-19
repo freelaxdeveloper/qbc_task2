@@ -18,8 +18,6 @@ $eloquentLoader = new EloquentLoader([
 ]);
 $eloquentLoader->load();
 
-define('USER_ID', 1);
-
 
 /**
  * Returns the connected template

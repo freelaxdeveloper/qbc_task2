@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Мар 19 2019 г., 11:42
--- Версия сервера: 5.7.25-0ubuntu0.18.04.2
--- Версия PHP: 7.2.15-0ubuntu0.18.04.1
+-- Время создания: Мар 19 2019 г., 15:04
+-- Версия сервера: 5.7.22-0ubuntu0.17.10.1
+-- Версия PHP: 5.6.36-1+ubuntu17.10.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -24,14 +24,14 @@ SET time_zone = "+00:00";
 -- Дамп данных таблицы `manuals`
 --
 
-INSERT INTO `manuals` (`id`, `manual_type_id`, `label`, `user_id`, `type_field`, `position`) VALUES
-(1, 2, 'Имя кота', 1, 'text', 1),
-(3, 2, 'Опишите кота', 1, 'textarea', 3),
-(4, 2, 'Домашние питомцы', 1, 'select', 4),
-(7, 2, 'Порода', 1, 'text', 9),
-(8, 2, 'Select', 1, 'select', 10),
-(9, 1, 'Для теста', 1, 'text', 3),
-(11, 2, 'Фото кота', 1, 'file', 2);
+INSERT INTO `manuals` (`id`, `manual_type_id`, `label`, `type_field`, `position`) VALUES
+(1, 2, 'Имя кота', 'text', 1),
+(3, 2, 'Опишите кота', 'textarea', 3),
+(4, 2, 'Домашние питомцы', 'select', 4),
+(7, 2, 'Порода', 'text', 9),
+(8, 2, 'Select', 'select', 10),
+(9, 1, 'Для теста', 'text', 3),
+(11, 2, 'Фото кота', 'file', 2);
 
 --
 -- Дамп данных таблицы `manual_options`
