@@ -19,8 +19,26 @@ if (!$user = User::find($user_id)) {
 }
 
 $manualTypes = ManualType::onlyPeople()->valueByUser($user_id)->get();
+dd2($manualTypes->toArray());
+
+if (!empty($_FILES)){
+    foreach ($_FILES as $key => $file) {
+        if (strpos($key, 'dictionary_file_') !== false){
+            $pathinfo = pathinfo($file['name']);
+            $tmp_name = $file['tmp_name'];
+            $path = storage_path('/files/' . $user_id . '/');
+            if(!is_dir($path)) {
+                mkdir($path, 0777);
+            }
+            $filePath = slug($pathinfo['filename']) . '.' . $pathinfo['extension'];
+            // dd2($filePath);
+            move_uploaded_file($tmp_name, $path . $filePath);
+        }
+    }
+}
 
 if (isset($_POST['send']) && !empty($_POST['dictionary'])) {
+//    dd2($_POST);
     $postData = $_POST['dictionary'];
     $manualValues = [];
 
