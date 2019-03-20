@@ -18,7 +18,7 @@ if (!$user = User::find($user_id)) {
     exit;
 }
 
-$manualTypes = ManualType::valueByUser($user_id)->get();
+$manualTypes = ManualType::onlyPeople()->valueByUser($user_id)->get();
 
 if (isset($_POST['send']) && !empty($_POST['dictionary'])) {
     $postData = $_POST['dictionary'];
@@ -34,10 +34,9 @@ if (isset($_POST['send']) && !empty($_POST['dictionary'])) {
             'value' => $value,
         ];
     }
-    $currentType = 'people';
-    ManualValue::whereHas('manual', function($query) use ($currentType) {
-        return $query->whereHas('manualType', function($query) use ($currentType) {
-            return $query->where('type', '!=', $currentType);
+    ManualValue::whereHas('manual', function($query) {
+        return $query->whereHas('manualType', function($query) {
+            return $query->onlyPeople();
         });
     })->whereUserId($user->id)->delete();
 
