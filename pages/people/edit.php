@@ -18,16 +18,6 @@ if (!$user = User::find($user_id)) {
     exit;
 }
 
-$currentType = 'club';
-$test = ManualValue::whereHas('manual', function($query) use ($currentType) {
-    return $query->whereHas('manualType', function($query) use ($currentType) {
-        return $query->where('type', '!=', $currentType);
-    });
-})->whereUserId($user->id)->get();
-
-dd2($test->toArray());
-
-
 $manualTypes = ManualType::valueByUser($user_id)->get();
 
 if (isset($_POST['send']) && !empty($_POST['dictionary'])) {
@@ -44,7 +34,12 @@ if (isset($_POST['send']) && !empty($_POST['dictionary'])) {
             'value' => $value,
         ];
     }
-    ManualValue::whereUserId($user->id)->delete();
+    $currentType = 'people';
+    ManualValue::whereHas('manual', function($query) use ($currentType) {
+        return $query->whereHas('manualType', function($query) use ($currentType) {
+            return $query->where('type', '!=', $currentType);
+        });
+    })->whereUserId($user->id)->delete();
 
     ManualValue::insert($manualValues);
     header('Location: ?id=' . $user->id);
