@@ -1,7 +1,7 @@
 <a href="/">Home</a><br/><br/><br/>
 <h1>{{ $user->login }}</h1>
 
-<form action="?id={{ $user->id}}" method="POST" enctype="multipart/form-data">
+<form action="/pages/people/{{ $user->id}}/edit" method="POST" enctype="multipart/form-data">
     @foreach ($manualTypes as $manualtype)
         <b>{{ $manualtype->title }}</b><br/><br/>
             @foreach ($manualtype->manuals as $item)

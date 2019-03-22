@@ -1,0 +1,9 @@
+RewriteEngine on
+
+### нужно ли открывать сущесвтующие файлы
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond $1 !^(index\.php)
+RewriteCond $1 !^(index\.php|storage)
+RewriteRule ^(.*)$ /index.php/$1 [L]

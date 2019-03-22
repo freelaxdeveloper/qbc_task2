@@ -8,5 +8,5 @@
 {{-- {{dd2($destroy)}} --}}
     {{$item->value['value']}}<br>
     <br><a href="{{$item->value['file_path']}}"><img src="{{$item->value['file_path']}}" width="150" height="150" alt="lorem"></a>
-    <br><a href="?id={{ $user->id }}&delete_manual={{ $item->value['id'] }}" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+    <br><a href="/manual/value/{{ $user->id }}/{{ $item->value['id'] }}/delete" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
 @endif
