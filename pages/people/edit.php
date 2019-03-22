@@ -19,20 +19,44 @@ if (!$user = User::find($user_id)) {
 }
 
 $manualTypes = ManualType::onlyPeople()->valueByUser($user_id)->get();
-dd2($manualTypes->toArray());
+
+if (isset($_GET['delete_manual']) && is_numeric($_GET['delete_manual'])) {
+    $manual_id = (int) $_GET['delete_manual'];
+    if (!$value = ManualValue::whereuserId($user->id)->find($manual_id)) {
+        echo 'Доступ запрещён!!!!';
+        // header('Location: /');
+        exit;
+    }
+    $value->deleteFile();
+    $value->delete();
+    echo 'Удалили!';
+    header('Refresh: 1; ?id=' . $user_id);
+    exit;
+}
 
 if (!empty($_FILES)){
     foreach ($_FILES as $key => $file) {
         if (strpos($key, 'dictionary_file_') !== false){
+            $manual_id = str_replace('dictionary_file_', '', $key);
             $pathinfo = pathinfo($file['name']);
             $tmp_name = $file['tmp_name'];
             $path = storage_path('/files/' . $user_id . '/');
             if(!is_dir($path)) {
                 mkdir($path, 0777);
-            }
+              }
             $filePath = slug($pathinfo['filename']) . '.' . $pathinfo['extension'];
-            // dd2($filePath);
-            move_uploaded_file($tmp_name, $path . $filePath);
+            
+            if ($value = ManualValue::whereuserId($user->id)->whereManualId($manual_id)->first()) {
+                $value->deleteFile();
+            }
+
+            if (move_uploaded_file($tmp_name, $path . $filePath)) {
+                ManualValue::updateOrCreate([
+                    'manual_id' => $manual_id,
+                    'user_id' => $user_id,
+                ],
+                ['value' => $filePath]);
+            }
         }
     }
 }
@@ -53,10 +77,11 @@ if (isset($_POST['send']) && !empty($_POST['dictionary'])) {
         ];
     }
     ManualValue::whereHas('manual', function($query) {
-        return $query->whereHas('manualType', function($query) {
+        return $query->where('type_field', '!=', 'file')->whereHas('manualType', function($query) {
             return $query->onlyPeople();
         });
     })->whereUserId($user->id)->delete();
+
 
     ManualValue::insert($manualValues);
     header('Location: ?id=' . $user->id);

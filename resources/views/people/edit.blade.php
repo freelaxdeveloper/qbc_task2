@@ -5,7 +5,7 @@
     @foreach ($manualTypes as $manualtype)
         <b>{{ $manualtype->title }}</b><br/><br/>
             @foreach ($manualtype->manuals as $item)
-                @include('types.' . $item->type_field, ['item' => $item, 'home' => $manualtype])
+                @include('types.' . $item->type_field, ['item' => $item, 'user' => $user])
         @endforeach
 
     @endforeach
